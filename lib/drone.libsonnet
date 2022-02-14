@@ -50,9 +50,7 @@ local pylintStep = pythonStepCommon {
 
 local testStep = pythonStepCommon {
   name: 'test',
-  commands+: [
-    'pytest --cov',
-  ],
+  commands+: ['pytest'],
 };
 
 
