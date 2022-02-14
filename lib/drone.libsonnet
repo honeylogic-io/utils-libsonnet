@@ -50,7 +50,7 @@ local pylintStep = pythonStepCommon {
 
 local testStep = pythonStepCommon {
   name: 'test',
-  commands+: ['pytest'],
+  commands+: ['pytest --ignore .poetry --cov'],
 };
 
 
