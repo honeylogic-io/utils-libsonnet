@@ -4,11 +4,14 @@ local container = k.core.v1.container;
 local deployment = k.apps.v1.deployment;
 
 {
-  createContainers(name, image, command, args, env):: container.new(name, image) +
-                                                      container.withCommand(command) +
-                                                      container.withArgs(args) +
-                                                      container.withEnvMap(env) +
-                                                      container.withImagePullPolicy('Always'),
+  createContainers(name, image, command, args, env)::
+    container.new(name, image) +
+    container.withCommand(command) +
+    container.withArgs(args) +
+    if std.type(env) == 'array' then
+      container.withEnv(env) else
+      container.withEnvMap(env) +
+      container.withImagePullPolicy('Always'),
 
   worker: {
     new(name, image, replicas=1, command=['celery'], args, env): {
